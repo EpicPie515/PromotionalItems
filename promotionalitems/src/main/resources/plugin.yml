@@ -1,0 +1,10 @@
+name: PromotionalItems
+version: 0.0.1
+main: net.kjnine.promotionalitems.PromoPlugin
+description: PromotionalItems allows the creation and distribution of items.
+author: KJNine
+commands:
+  promo:
+    description: View active promos and receive a promo.
+  promoitem:
+    description: Manage promos and creation/deletion of them.

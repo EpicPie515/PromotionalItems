@@ -1,0 +1,4 @@
+# Config File for PromotionalItems by KJNine
+
+# Should the /promo command use a GUI or just chat messages?
+promoGui: true
