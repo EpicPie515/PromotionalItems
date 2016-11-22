@@ -21,7 +21,7 @@ public class PromoCommand implements CommandExecutor {
 				return false;
 			}
 			if(args.length == 0) {
-				// TODO List all promos.
+				
 			}
 		}
 		return false;
