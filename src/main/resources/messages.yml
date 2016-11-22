@@ -1,0 +1,7 @@
+# All messages for listing promos.
+promoGuiOpen: '&3Showing All Active Promos'
+promoGuiAllOpen: '&3Showing All Promos'
+promoList: '&3Active Promos:'
+# Arguments. For this it is, in order, promo name, status color, status(claimed, unclaimed, expired), description
+promoListPromos: '&3{0} - &a[{1}{2}&a] {3}'
+promoListNone: '&3No currently active promos.'
