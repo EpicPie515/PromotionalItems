@@ -15,7 +15,6 @@ public class PromoPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		itemsFile = new ItemsFile();
-		
 		instance = this;
 		log.info("Successfully Enabled PromotionalItems by KJNine.");
 	}

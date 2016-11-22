@@ -1,13 +1,19 @@
 package net.kjnine.promotionalitems.commands;
 
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import net.kjnine.promotionalitems.PromoPlugin;
 import net.md_5.bungee.api.ChatColor;
 
 public class PromoCommand implements CommandExecutor {
+	
+	private PromoPlugin pl = PromoPlugin.instance;
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(label.equalsIgnoreCase("promo")) {
@@ -21,7 +27,14 @@ public class PromoCommand implements CommandExecutor {
 				return false;
 			}
 			if(args.length == 0) {
-				
+				if(pl.getConfig().getBoolean("promoGui") && pl.getConfig().getBoolean("listGui")) {
+					// TODO Gui
+				} else {
+					FileConfiguration items = pl.itemsFile.getConfig();
+					if(!items.contains("promoList"))
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', ""));
+					List<String> promoList = items.getStringList("promoList");
+				}
 			}
 		}
 		return false;
