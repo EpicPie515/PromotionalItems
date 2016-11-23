@@ -3,8 +3,6 @@ mustBePlayer: '&cYou must be a player to use that command.'
 noPermission: '&cYou do not have permission to use that command.'
 
 # All messages for listing promos.
-promoGuiOpen: '&3Showing All Active Promos'
-promoGuiAllOpen: '&3Showing All Promos'
 promoList: '&3Active Promos:'
 promoListAll: '&3All Promos:'
 

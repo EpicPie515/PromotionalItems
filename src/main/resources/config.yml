@@ -2,6 +2,3 @@
 
 # Should the /promo command use a GUI or just chat messages? This includes receiving a promo.
 promoGui: true
-
-# Should a GUI be used when listing promos also? Requires 'promoGui' to be true.
-listGui: false

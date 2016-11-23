@@ -37,66 +37,35 @@ public class PromoCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("noPermission")));
 					return false;
 				}
-				if(pl.getConfig().getBoolean("promoGui") && pl.getConfig().getBoolean("listGui")) {
-					if(!items.contains("promoList")) {
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListNone")));
-						return false;
+				if(!items.contains("promoList")) {
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListNone")));
+					return false;
+				}
+				List<String> promoList = items.getStringList("promoList");
+				if(listall)
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListAll")));
+				if(!listall)
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoList")));
+				for(String lPromo : promoList) {
+					String description = items.getString("promos."+lPromo+".description");
+					boolean active = items.getBoolean("promos."+lPromo+".active");
+					boolean claimed = (claims.contains("promos."+lPromo+"."+p.getUniqueId()) && claims.getBoolean("promos."+lPromo+"."+p.getUniqueId()));
+					String status = "";
+					if(!active && !claimed) {
+						status = lang.getString("statusExpired");
+					} else if(claimed) {
+						status = lang.getString("statusClaimed");
+					} else {
+						status = lang.getString("statusUnclaimed");
 					}
-					Inventory gui = pl.getServer().createInventory(null, 54);
-					List<String> promoList = items.getStringList("promoList");
-					if(listall)
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListAll")));
-					if(!listall)
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoList")));
-					for(String lPromo : promoList) {
-						String description = items.getString("promos."+lPromo+".description");
-						boolean active = items.getBoolean("promos."+lPromo+".active");
-						boolean claimed = (claims.contains("promos."+lPromo+"."+p.getUniqueId()) && claims.getBoolean("promos."+lPromo+"."+p.getUniqueId()));
-						ItemStack icon = items.getItemStack("promos."+lPromo+".icon");
-						
-						String status = "";
-						if(!active && !claimed) {
-							status = lang.getString("statusExpired");
-						} else if(claimed) {
-							status = lang.getString("statusClaimed");
-						} else {
-							status = lang.getString("statusUnclaimed");
-						}
-						if(!active && !listall)
-							continue;
-						
-					}
-				} else {
-					if(!items.contains("promoList")) {
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListNone")));
-						return false;
-					}
-					List<String> promoList = items.getStringList("promoList");
-					if(listall)
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListAll")));
-					if(!listall)
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoList")));
-					for(String lPromo : promoList) {
-						String description = items.getString("promos."+lPromo+".description");
-						boolean active = items.getBoolean("promos."+lPromo+".active");
-						boolean claimed = (claims.contains("promos."+lPromo+"."+p.getUniqueId()) && claims.getBoolean("promos."+lPromo+"."+p.getUniqueId()));
-						String status = "";
-						if(!active && !claimed) {
-							status = lang.getString("statusExpired");
-						} else if(claimed) {
-							status = lang.getString("statusClaimed");
-						} else {
-							status = lang.getString("statusUnclaimed");
-						}
-						if(!active && !listall)
-							continue;
-						String msg = lang.getString("promoListPromos");
-						msg = msg.replaceAll("[name]", lPromo);
-						msg = msg.replaceAll("[status]", status);
-						msg = msg.replaceAll("[desc]", description);
-						msg = ChatColor.translateAlternateColorCodes('&', msg);
-						p.sendMessage(msg);
-					}
+					if(!active && !listall)
+						continue;
+					String msg = lang.getString("promoListPromos");
+					msg = msg.replaceAll("[name]", lPromo);
+					msg = msg.replaceAll("[status]", status);
+					msg = msg.replaceAll("[desc]", description);
+					msg = ChatColor.translateAlternateColorCodes('&', msg);
+					p.sendMessage(msg);
 				}
 			}
 		}
