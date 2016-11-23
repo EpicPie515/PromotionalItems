@@ -18,6 +18,7 @@ public class YAMLFile {
 	
 	public YAMLFile(String fileName) {
 		this.fileName = fileName;
+		init();
 	}
 	
 	protected PromoPlugin pl = PromoPlugin.instance;

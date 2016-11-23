@@ -12,21 +12,15 @@ public class PromoPlugin extends JavaPlugin {
 	public static PromoPlugin instance;
 	public YAMLFile itemsFile;
 	public YAMLFile langFile;
+	public YAMLFile claimsFile;
 	
 	@Override
 	public void onEnable() {
 		itemsFile = new YAMLFile("items.yml");
 		langFile = new YAMLFile("messages.yml");
-		postInitEnable();
+		claimsFile = new YAMLFile("claims.yml");
 		instance = this;
 		log.info("Successfully Enabled PromotionalItems by KJNine.");
-	}
-	
-	public void postInitEnable() {
-		itemsFile.reload();
-		itemsFile.save();
-		langFile.reload();
-		langFile.save();
 	}
 	
 	@Override
