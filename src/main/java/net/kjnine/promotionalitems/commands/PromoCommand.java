@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import net.kjnine.promotionalitems.PromoPlugin;
 import net.md_5.bungee.api.ChatColor;
@@ -47,6 +48,24 @@ public class PromoCommand implements CommandExecutor {
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListAll")));
 					if(!listall)
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoList")));
+					for(String lPromo : promoList) {
+						String description = items.getString("promos."+lPromo+".description");
+						boolean active = items.getBoolean("promos."+lPromo+".active");
+						boolean claimed = (claims.contains("promos."+lPromo+"."+p.getUniqueId()) && claims.getBoolean("promos."+lPromo+"."+p.getUniqueId()));
+						ItemStack icon = items.getItemStack("promos."+lPromo+".icon");
+						
+						String status = "";
+						if(!active && !claimed) {
+							status = lang.getString("statusExpired");
+						} else if(claimed) {
+							status = lang.getString("statusClaimed");
+						} else {
+							status = lang.getString("statusUnclaimed");
+						}
+						if(!active && !listall)
+							continue;
+						
+					}
 				} else {
 					if(!items.contains("promoList")) {
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoListNone")));
