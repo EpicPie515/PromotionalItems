@@ -1,6 +1,8 @@
 # Error Messages
 mustBePlayer: '&cYou must be a player to use that command.'
 noPermission: '&cYou do not have permission to use that command.'
+promoNotFound: '&cUnknown Promo. Perhaps it is no longer active.'
+alreadyClaimed: '&cYou have already claimed this promo.'
 
 # All messages for listing promos.
 promoList: '&3Active Promos:'
@@ -13,6 +15,7 @@ promoListAll: '&3All Promos:'
 promoListPromos: '&3[name] - &a[[status]&a] [desc]'
 
 promoListNone: '&3No currently active promos.'
+promoReceived: '&3You received your promo.'
 statusClaimed: '&c&lClaimed'
 statusUnclaimed: '&a&lAvailable'
 statusExpired: '&7&lExpired'

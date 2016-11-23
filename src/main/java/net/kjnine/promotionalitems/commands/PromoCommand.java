@@ -7,7 +7,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import net.kjnine.promotionalitems.PromoPlugin;
@@ -66,6 +65,40 @@ public class PromoCommand implements CommandExecutor {
 					msg = msg.replaceAll("[desc]", description);
 					msg = ChatColor.translateAlternateColorCodes('&', msg);
 					p.sendMessage(msg);
+				}
+			} else {
+				List<String> promoList = items.getStringList("promoList");
+				boolean t = false;
+				for(String lPromo : promoList) {
+					if(args[0].equalsIgnoreCase(lPromo)) {
+						t = true;
+						boolean active = items.getBoolean("promos."+lPromo+".active");
+						boolean claimed = (claims.contains("promos."+lPromo+"."+p.getUniqueId()) && claims.getBoolean("promos."+lPromo+"."+p.getUniqueId()));
+						if(!active) {
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoNotFound")));
+							return false;
+						}
+						if(claimed) {
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("alreadyClaimed")));
+							return false;
+						}
+						if(pl.getConfig().getBoolean("promoGui")) {
+							
+						} else {
+							@SuppressWarnings("unchecked")
+							List<ItemStack> it = (List<ItemStack>) items.getList("promos."+lPromo+".items");
+							// TODO check for full.
+							for(ItemStack i : it) {
+								p.getInventory().addItem(i);
+							}
+						}
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoReceived")));
+						break;
+					}
+				}
+				if(!t) {
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', lang.getString("promoNotFound")));
+					return false;
 				}
 			}
 		}
